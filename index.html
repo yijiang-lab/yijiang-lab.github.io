@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#F6F3EC">
 <meta name="description" content="34道题，生成你的微塑料暴露档案。基于公开科研文献的权重模型，中国本地化版。">
+<meta name="author" content="谊匠 · 造益生物">
+<script>if(top!==self){top.location=self.location;}</script>
 <meta property="og:title" content="你每天&ldquo;吃&rdquo;进多少微塑料？">
 <meta property="og:description" content="34道题，生成你的微塑料暴露档案">
 <title>微塑料计算器 · 暴露自测</title>
@@ -239,7 +241,7 @@ const CONFIG = {
       </div>
       <p class="resume-note" id="resume-note" style="display:none">继续上次的答题 →</p>
       <button class="btn-main" id="btn-start">开始作答</button>
-      <p class="footnote">本工具基于公开科研文献构建权重模型（框架 v2.3，中国本地化），并参考新华网、中国疾控中心、清华大学、复旦大学、浙江大学等机构发布的检测与科普数据。结果为相对暴露水平的量级估算，<b>不构成医疗诊断或健康建议</b>。作答数据仅保存在你的手机本地。</p>
+      <p class="footnote">本工具基于公开科研文献构建权重模型（框架 v2.3，中国本地化），并参考新华网、中国疾控中心、清华大学、复旦大学、浙江大学等机构发布的检测与科普数据。结果为相对暴露水平的量级估算，<b>不构成医疗诊断或健康建议</b>。作答数据仅保存在你的手机本地。<br>本工具由 <b>谊匠</b>（造益生物）出品，题目体系与本地化权重表为原创编译，© 2026 造益生物 · 未经授权不得复制、转载或用于商业用途。</p>
     </div>
   </section>
 
@@ -746,7 +748,7 @@ function computeAndRender(){
   /* 参考文献 */
   h+='<div class="refs"><b>REFERENCES / 数据来源</b>'
     +'权重框架基于公开 Methodology v2.3；中国场景数据参考：新华网（沸水去除微塑料）、中国疾控中心（饮用水检出率、油烟）、清华大学（厨房 PM2.5 实测）、复旦大学（油烟肺部炎症）、浙江大学（微波塑料餐盒释放）、同济大学（饮用水综述）及国内现制饮品抽检；国际文献：Schymanski 2018、Li 2020 (Nature Food)、Dris 2017、Habib 2022、Sheridan 2023、Zhang 2022 等。'
-    +'<br><br>本档案为相对暴露水平的量级估算，不构成医疗诊断。如需就医请咨询专业医师。</div>';
+    +'<br><br>本档案为相对暴露水平的量级估算，不构成医疗诊断。如需就医请咨询专业医师。<br><br>© 2026 造益生物 · 谊匠 出品，保留所有权利。</div>';
 
   $('result-body').innerHTML=h;
   show('result');
