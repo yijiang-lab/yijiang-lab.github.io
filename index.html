@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <meta name="theme-color" content="#F6F3EC">
 <meta name="description" content="34道题，生成你的微塑料暴露档案。基于公开科研文献的权重模型，中国本地化版。">
-<meta name="author" content="谊匠 · 造益生物">
+<meta name="author" content="造益生物">
 <script>if(top!==self){top.location=self.location;}</script>
 <meta property="og:title" content="你每天&ldquo;吃&rdquo;进多少微塑料？">
 <meta property="og:description" content="34道题，生成你的微塑料暴露档案">
@@ -178,16 +178,6 @@ body{
 .advice b{display:block;font-size:.88rem;margin-bottom:.25rem}
 .advice p{font-size:.78rem;color:var(--ink-soft);line-height:1.75}
 
-/* 解锁 */
-.unlock{margin-top:1.2rem;padding:1.5rem 1.2rem 1.3rem;background:var(--ink);border-radius:4px;text-align:center;color:var(--paper);position:relative;overflow:hidden}
-.unlock::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 90% 55% at 50% -8%, rgba(246,243,236,.13), transparent)}
-.unlock h3{font-family:var(--serif);font-size:1.05rem;letter-spacing:.24em;margin-bottom:.45rem}
-.unlock .sub{font-size:.74rem;color:rgba(246,243,236,.65);margin-bottom:1.1rem}
-.qr-box{width:150px;height:150px;margin:0 auto 0.9rem;background:#fff;border-radius:3px;padding:8px;display:flex;align-items:center;justify-content:center}
-.qr-box img{width:100%;height:100%;object-fit:contain}
-.unlock .kw{display:inline-block;font-size:.78rem;border:1px dashed rgba(246,243,236,.5);padding:.35rem .9rem;border-radius:2px;margin-top:.1rem}
-.unlock .kw b{color:#fff;font-family:var(--mono);letter-spacing:.2em}
-
 /* 分享与底注 */
 .share-row{display:flex;gap:.7rem;margin-top:1.6rem}
 .btn-sec{flex:1;padding:.85rem;border:1.5px solid var(--ink);background:none;font-family:var(--serif);font-size:.92rem;font-weight:700;letter-spacing:.24em;text-indent:.24em;color:var(--ink);border-radius:3px;cursor:pointer}
@@ -210,9 +200,6 @@ body{
 const CONFIG = {
   brand: '微塑料计算器',                      // 工具名（中性，可换）
   brandEn: 'MICROPLASTIC CALCULATOR',
-  gzhName: '谊匠',                       // 公众号名称
-  gzhKeyword: '微塑料',                  // 解锁关键词
-  qrSrc: '',                            // ← 替换：公众号二维码图片 URL（留空显示占位）
 };
 </script>
 
@@ -223,7 +210,7 @@ const CONFIG = {
     <header class="masthead">
       <div class="mast-top"><span>NO.001</span><span>2026 · 秋</span></div>
       <div class="mast-brand" id="brand-cn">微塑料计算器</div>
-      <div class="mast-sub" id="brand-en">PLASTIC INTAKE ARCHIVE</div>
+      <div class="mast-sub" id="brand-en">MICROPLASTIC CALCULATOR</div>
     </header>
     <div class="hero">
       <span class="hero-kicker">34 题自测 · 约 3 分钟</span>
@@ -241,7 +228,7 @@ const CONFIG = {
       </div>
       <p class="resume-note" id="resume-note" style="display:none">继续上次的答题 →</p>
       <button class="btn-main" id="btn-start">开始作答</button>
-      <p class="footnote">本工具基于公开科研文献构建权重模型（框架 v2.3，中国本地化），并参考新华网、中国疾控中心、清华大学、复旦大学、浙江大学等机构发布的检测与科普数据。结果为相对暴露水平的量级估算，<b>不构成医疗诊断或健康建议</b>。作答数据仅保存在你的手机本地。<br>本工具由 <b>谊匠</b>（造益生物）出品，题目体系与本地化权重表为原创编译，© 2026 造益生物 · 未经授权不得复制、转载或用于商业用途。</p>
+      <p class="footnote">本工具基于公开科研文献构建权重模型（框架 v2.3，中国本地化），并参考新华网、中国疾控中心、清华大学、复旦大学、浙江大学等机构发布的检测与科普数据。结果为相对暴露水平的量级估算，<b>不构成医疗诊断或健康建议</b>。作答数据仅保存在你的手机本地。<br>本工具由 <b>造益生物</b>出品，题目体系与本地化权重表为原创编译，© 2026 造益生物 · 未经授权不得复制、转载或用于商业用途。</p>
     </div>
   </section>
 
@@ -684,7 +671,7 @@ function computeAndRender(){
   const adviceList=r.ups.filter(f=>f.advice).slice();  // 按权重已排序
   const praiseList=r.dns.filter(f=>f.praise);
   if(r.preg){adviceList.push({w:9,advice:'孕哺乳期从严：胎盘与母乳中均已检出微塑料（Ragusa 2021/2022）——外卖加热、瓶装水、剥落不粘锅三类先改',name:'孕哺乳期附加'});}
-  const free=adviceList.slice(0,3),locked=adviceList.slice(3);
+  const free=adviceList;
 
   let h='';
   /* 档案头 */
@@ -734,13 +721,6 @@ function computeAndRender(){
   free.forEach(f=>{h+='<div class="advice"><b>'+f.advice.split('——')[0].split('：')[0]+'</b><p>'+f.advice+'</p></div>'});
   if(!free.length)h+='<div class="advice good"><b>暂无高危项需要修复</b><p>把清单里的保护性习惯保持住即可。</p></div>';
   praiseList.slice(0,3).forEach(f=>{h+='<div class="advice good"><b>做得好 · '+f.name+'</b><p>'+f.praise+'</p></div>'});
-  if(locked.length){
-    h+='<div class="unlock"><h3>还有 '+locked.length+' 条个性化建议</h3>'
-      +'<div class="sub">按你的暴露来源逐条定制 · 全部解锁</div>'
-      +'<div class="qr-box">'+(CONFIG.qrSrc?'<img src="'+CONFIG.qrSrc+'" alt="二维码">':qrPlaceholder())+'</div>'
-      +'<div class="kw">长按识别二维码 · 关注 <b>'+CONFIG.gzhName+'</b></div>'
-      +'<div class="kw" style="margin-top:.5rem">回复「<b>'+CONFIG.gzhKeyword+'</b>」获取完整清单</div></div>';
-  }
   /* 分享 */
   h+='<div class="share-row"><button class="btn-sec" id="btn-copy">复制链接</button><button class="btn-sec" id="btn-share">生成分享</button></div>'
     +'<p style="text-align:center;font-size:.7rem;color:var(--ink-faint);margin-top:.7rem">微信内点右上角「···」可转发给家人朋友</p>'
@@ -748,7 +728,7 @@ function computeAndRender(){
   /* 参考文献 */
   h+='<div class="refs"><b>REFERENCES / 数据来源</b>'
     +'权重框架基于公开 Methodology v2.3；中国场景数据参考：新华网（沸水去除微塑料）、中国疾控中心（饮用水检出率、油烟）、清华大学（厨房 PM2.5 实测）、复旦大学（油烟肺部炎症）、浙江大学（微波塑料餐盒释放）、同济大学（饮用水综述）及国内现制饮品抽检；国际文献：Schymanski 2018、Li 2020 (Nature Food)、Dris 2017、Habib 2022、Sheridan 2023、Zhang 2022 等。'
-    +'<br><br>本档案为相对暴露水平的量级估算，不构成医疗诊断。如需就医请咨询专业医师。<br><br>© 2026 造益生物 · 谊匠 出品，保留所有权利。</div>';
+    +'<br><br>本档案为相对暴露水平的量级估算，不构成医疗诊断。如需就医请咨询专业医师。<br><br>© 2026 造益生物 · 保留所有权利。</div>';
 
   $('result-body').innerHTML=h;
   show('result');
@@ -785,19 +765,6 @@ function gaugeSVG(score,color){
     +'<text x="27" y="128" font-size="9" fill="#7A8B83" font-family="monospace">0</text>'
     +'<text x="194" y="128" font-size="9" fill="#7A8B83" font-family="monospace">100</text>'
     +'</svg>';
-}
-/* 二维码占位 */
-function qrPlaceholder(){
-  let r='';
-  const seed=[0,1,1,0,1,0,0,1,1,0,1,1,0,0,1,0,1,1,0,1,0,0,1,1,0];
-  for(let i=0;i<25;i++)for(let j=0;j<25;j++){
-    if((seed[(i*7+j*3)%25]&&(i>2&&i<22&&j>2&&j<22))||((i<7&&j<7)||(i>17&&j<7)||(i<7&&j>17))){
-      if((i+j)%2===0)r+='<rect x="'+(8+i*5.4)+'" y="'+(8+j*5.4)+'" width="5.4" height="5.4" fill="#16342B"/>';
-    }
-  }
-  return '<svg viewBox="0 0 150 150" width="134" height="134">'+r
-    +'<text x="75" y="79" font-size="10" text-anchor="middle" fill="#C24A2E" font-weight="bold">二维码占位</text>'
-    +'<text x="75" y="93" font-size="7" text-anchor="middle" fill="#7A8B83">上线前替换 CONFIG.qrSrc</text></svg>';
 }
 </script>
 </body>
