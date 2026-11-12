@@ -200,7 +200,15 @@ body{
 const CONFIG = {
   brand: '微塑料计算器',                      // 工具名（中性，可换）
   brandEn: 'MICROPLASTIC CALCULATOR',
+  tongjiId: '',                            // ← 百度统计 site ID（hm.js?后面那串），填入自动启用
 };
+/* 统计：tongjiId 非空时加载百度统计 */
+var _hmt=window._hmt||[];
+if(CONFIG.tongjiId){
+  (function(){var hm=document.createElement('script');hm.src='https://hm.baidu.com/hm.js?'+CONFIG.tongjiId;
+    var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(hm,s)})();
+}
+function track(action,label,value){try{if(window._hmt)window._hmt.push(['_trackEvent','quiz',action,label,value])}catch(e){}}
 </script>
 
 <div class="wrap">
@@ -576,8 +584,9 @@ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show')
     }
   }catch(e){}
 })();
-$('btn-start').addEventListener('click',()=>{answers={};cur=0;buildOrder();show('quiz');renderQ();});
+$('btn-start').addEventListener('click',()=>{track('start');answers={};cur=0;buildOrder();show('quiz');renderQ();});
 $('resume-note').addEventListener('click',()=>{
+  track('resume');
   try{answers=JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch(e){answers={}}
   if(!Object.keys(answers).length){buildOrder();show('quiz');renderQ();return}
   buildOrder();
@@ -662,6 +671,7 @@ const pwTxt={in:'摄入',inh:'吸入',both:'摄入+吸入'};
 function computeAndRender(){
   const r=compute();
   const b=bandOf(r.score);
+  track('complete',b.label,r.score);
   const today=new Date();
   const dstr=today.getFullYear()+'.'+String(today.getMonth()+1).padStart(2,'0')+'.'+String(today.getDate()).padStart(2,'0');
   const no='MP-'+today.getFullYear()+'-'+String(Math.floor(1000+Math.random()*9000));
